@@ -128,26 +128,6 @@
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>3.0.0</version> <!-- or any other version -->
-				<executions>
-					<execution>
-						<id>allure-serve</id>
-						<phase>verify</phase> <!-- or any other phase after tests -->
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>allure</executable>
-							<arguments>
-								<argument>serve</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 </project>

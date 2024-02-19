@@ -2,4 +2,7 @@ allure-results/
 .settings/
 logs/
 test-output/
-target/**/
+target/generated-sources/
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
