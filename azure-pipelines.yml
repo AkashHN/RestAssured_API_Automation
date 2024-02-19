@@ -1,0 +1,24 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  AllureReportDirectory: '$(Build.ArtifactStagingDirectory)/allure-results'
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean test'
+    options: '-Dmaven.test.failure.ignore=true'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: 'allure-results'
+    testRunTitle: 'RestAssured Tests'
+
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(AllureReportDirectory)'
+    artifactName: 'AllureReport'
