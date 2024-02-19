@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="API Suite">
+  <test name="CRUDTest">
+    <classes>
+      <class name="com.feuji.apitest.test.RestAPITest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
