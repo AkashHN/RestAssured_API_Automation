@@ -4,21 +4,35 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  AllureReportDirectory: '$(Build.ArtifactStagingDirectory)/allure-results'
 steps:
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean test'
     options: '-Dmaven.test.failure.ignore=true'
-- task: PublishTestResults@2
+# - task: PublishTestResults@2
+#   inputs:
+#     testResultsFiles: 'allure-results'
+#     testRunTitle: 'RestAssured Tests'
+
+
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathtoPublish: '$(Build.SourcesDirectory)/allure-results/'
+#     artifactName: 'AllureReport'
+- script: |
+    cd '$(Build.SourcesDirectory)'
+    allure generate allure-results --clean -o allure-report
+  displayName: 'generate allure report'
+
+- task: CopyFiles@2
   inputs:
-    testResultsFiles: 'allure-results'
-    testRunTitle: 'RestAssured Tests'
-
-
+    SourceFolder: '$(Build.SourcesDirectory)/allure-report'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+  
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(Build.SourcesDirectory)/allure-results/'
-    artifactName: 'AllureReport'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'reports'
+    publishLocation: 'Container'
