@@ -22,7 +22,7 @@ steps:
 #     artifactName: 'AllureReport'
 - script: |
     cd '$(Build.SourcesDirectory)'
-    allure generate allure-results --clean -o allure-report
+    mvn io.qameta.allure:allure-maven:report
   displayName: 'generate allure report'
 
 - task: CopyFiles@2
